@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="appRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="400.0" styleClass="root-style" stylesheets="@../stylesheets/app-styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.duplicate_files_remover.MainController">
+   <children>
+      <HBox alignment="CENTER" fillHeight="false" prefHeight="35.0" prefWidth="400.0" spacing="10.0" styleClass="top-bar-style">
+         <children>
+            <Label styleClass="app-title-style" text="Duplicate File Remover">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="35.0" prefWidth="75.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" onMouseClicked="#clickOnMinimizeButton" prefHeight="28.0" prefWidth="48.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="close-button-text" text="---" wrappingWidth="10.9892578125">
+                           <font>
+                              <Font name="Arial Bold" size="11.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <styleClass>
+                        <String fx:value="close-button-style" />
+                        <String fx:value="minimize-button-style" />
+                     </styleClass>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="65.0" layoutY="18.0" onMouseClicked="#clickOnCloseButton" prefHeight="28.0" prefWidth="48.0" styleClass="close-button-style">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="close-button-text" text="X">
+                           <font>
+                              <Font name="Arial Bold" size="11.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="110.0" />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
+      <ProgressIndicator fx:id="duplicateProgressIndicator" layoutX="90.0" layoutY="56.0" prefHeight="207.0" prefWidth="209.0" progress="0.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.9725490212440491" green="0.5176470875740051" blue="0.24313725531101227" />
+               </color>
+            </DropShadow>
+         </effect>
+         <styleClass>
+            <String fx:value="progress-style" />
+            <String fx:value="progress-duplicate-style" />
+         </styleClass>
+      </ProgressIndicator>
+      <ProgressIndicator fx:id="totalProgressIndicator" layoutX="100.0" layoutY="66.0" prefHeight="202.0" prefWidth="237.0" progress="0.0" styleClass="progress-style">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.8196078538894653" green="0.26274511218070984" blue="0.572549045085907" />
+               </color>
+            </DropShadow>
+         </effect>
+      </ProgressIndicator>
+      <AnchorPane fx:id="scanAnimateRoot" layoutX="120.0" layoutY="77.0" prefHeight="200.0" prefWidth="200.0">
+         <styleClass>
+            <String fx:value="progress-cover-style" />
+            <String fx:value="progress-cover-overlay-style" />
+         </styleClass>
+         <effect>
+            <DropShadow height="47.0" radius="23.0" width="47.0">
+               <color>
+                  <Color red="0.8196078538894653" green="0.26274511218070984" blue="0.572549045085907" />
+               </color>
+            </DropShadow>
+         </effect>
+      </AnchorPane>
+      <VBox fx:id="scanButton" alignment="CENTER" layoutX="120.0" layoutY="77.0" onMouseClicked="#clickOnScanButton" prefHeight="98.0" prefWidth="100.0" spacing="10.0" styleClass="progress-cover-style">
+         <children>
+            <Label fx:id="scanLabel" text="SCAN" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="22.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
+            <Label fx:id="scanTypeLabel" alignment="CENTER" layoutX="39.0" layoutY="79.0" prefHeight="17.0" prefWidth="119.0" text="Total Files" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" fillHeight="false" layoutX="100.0" layoutY="343.0" prefHeight="64.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <Label text="Normal" textFill="#d14392">
+               <styleClass>
+                  <String fx:value="switch-button-text" />
+                  <String fx:value="switch-button-text-1" />
+               </styleClass>
+            </Label>
+            <HBox fx:id="switchButton" alignment="CENTER_LEFT" onMouseClicked="#clickOnPerformanceSwitchButton" prefHeight="100.0" prefWidth="200.0" styleClass="switch-button-wrapper">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="switch-button" />
+               </children>
+            </HBox>
+            <Label styleClass="switch-button-text" text="Highest" />
+         </children>
+      </HBox>
+      <Circle fx:id="detailCircle1" layoutX="88.0" layoutY="465.0" radius="47.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8196078538894653" green="0.26274511218070984" blue="0.572549045085907" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9725490212440491" green="0.5176470875740051" blue="0.24313725531101227" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <VBox alignment="CENTER" layoutX="51.0" layoutY="428.0" prefHeight="64.0" prefWidth="66.0" styleClass="detail-inner-wrapper">
+         <children>
+            <Label text="normal" textFill="#d14392">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="31.0" text="one thread" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="151.0" layoutY="425.0" prefHeight="20.0" prefWidth="85.0" text="Normal" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="243.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="performance is the " wrappingWidth="106.50390625" />
+      <Text fill="WHITE" layoutX="151.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="recommended way to scan. But file scanning time take lots of time as it use only 1 thread of cpu." textAlignment="JUSTIFY" wrappingWidth="206.0" />
+      <Circle fx:id="detailCircle2" layoutX="88.0" layoutY="610.0" radius="47.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9725490212440491" green="0.5176470875740051" blue="0.24313725531101227" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.8196078538894653" green="0.26274511218070984" blue="0.572549045085907" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Circle>
+      <VBox alignment="CENTER" layoutX="51.0" layoutY="573.0" prefHeight="64.0" prefWidth="66.0" styleClass="detail-inner-wrapper">
+         <children>
+            <Label text="highest" textFill="#f8843e">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="31.0" text="max thread" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="151.0" layoutY="554.0" prefHeight="35.0" prefWidth="94.0" text="Highest" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="243.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="performance setting" wrappingWidth="115.50390625" />
+      <Text fill="WHITE" layoutX="151.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="only takes short amout of time to scan duplicate files compared to normal performace setting. Attention: This setting will lead the device to overheating while scanning process." textAlignment="JUSTIFY" wrappingWidth="206.0" />
+      <VBox fx:id="removeDuplicateButton" alignment="CENTER" layoutX="75.0" layoutY="709.0" onMouseClicked="#clickOnRemoveDuplicateButton" prefHeight="200.0" prefWidth="100.0" spacing="3.0" styleClass="remove-button-style" visible="false">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Remove Duplicate Files">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="37.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="developed by thant zin aung">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Text>
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.8470588326454163" green="0.27450981736183167" blue="0.48627451062202454" />
+               </color>
+            </DropShadow>
+         </effect>
+      </VBox>
+      <VBox layoutY="276.0" prefHeight="64.0" prefWidth="400.0">
+         <children>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="44.0" prefWidth="195.0" spacing="5.0">
+               <children>
+                  <HBox prefHeight="31.0" prefWidth="61.0" styleClass="color-example-1" />
+                  <Label fx:id="totalFiles" styleClass="color-example-text" text="Total Files" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="44.0" prefWidth="226.0" spacing="5.0">
+               <children>
+                  <HBox prefHeight="31.0" prefWidth="61.0">
+                     <styleClass>
+                        <String fx:value="color-example-1" />
+                        <String fx:value="color-example-2" />
+                     </styleClass>
+                  </HBox>
+                  <Label fx:id="duplicateFiles" styleClass="color-example-text" text="Duplicate Files" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
